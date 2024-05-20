@@ -1,0 +1,30 @@
+﻿@model webshop_projekt.Models.Proizvodac
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Jeste li sigurni da zelite izbrisati ovog proizvodaca?</h3>
+<div>
+    <h4>Proizvodac</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProizvodacName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProizvodacName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

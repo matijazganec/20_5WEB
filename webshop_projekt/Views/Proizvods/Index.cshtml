@@ -1,0 +1,101 @@
+﻿@model IEnumerable<webshop_projekt.Models.Proizvod>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Proizvodi u skladištu</h2>
+
+<p>
+    @Html.ActionLink("Dodaj novi proizvod", "Create", null, new { @class = "btn btn-secondary" })
+</p>
+@using (Html.BeginForm("Index", "Proizvods", FormMethod.Get))
+{
+    <p>
+        Naziv: @Html.TextBox("Naziv")
+        <button type="submit" class="btn btn-secondary">Traži</button>
+    </p>
+}
+
+@if (string.IsNullOrEmpty(Request.QueryString["Naziv"]))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Proizvodac)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cijena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proizvodac)
+                </td>
+                <td>
+                    @Html.ActionLink("Uredi", "Edit", new { id = item.idProizvod }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Detalji", "Details", new { id = item.idProizvod }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Izbrisi", "Delete", new { id = item.idProizvod }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    var kategorija = (string)Request.QueryString["Naziv"].ToLower().Trim();
+
+    <p>Filter: @kategorija</p>
+    <button type="button" onclick="window.location.href='@Url.Action("Index", "Proizvods")'" class="btn btn-secondary">Ukloni filter</button>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proizvodac)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Where(p => p.Naziv.ToLower().Contains(kategorija)))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cijena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proizvodac)
+                </td>
+                <td>
+                    @Html.ActionLink("Uredi", "Edit", new { id = item.idProizvod }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Detalji", "Details", new { id = item.idProizvod }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Izbrisi", "Delete", new { id = item.idProizvod }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}

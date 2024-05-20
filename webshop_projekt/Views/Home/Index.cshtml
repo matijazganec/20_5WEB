@@ -1,0 +1,86 @@
+﻿@model IEnumerable<webshop_projekt.Models.Proizvod>
+@{
+    ViewBag.Title = "Početna";
+    var model = ViewBag.Model;
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title">Web shop</h1>
+        <p class="lead">Web shop sa svom potrebon periferijom i komponentama.</p>
+        <div style="display:flex; justify-content:flex-end">
+            <div id="desno" style="display:flex; float:inline-end">
+                <p style="display:flex;float:right">
+                    <h5 style="display:flex; align-content:center; margin-top:5px">Tražilica: </h5>
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                    {
+                    <p>
+                        @Html.TextBox("Naziv")
+                        <button type="submit" class="btn btn-secondary">Traži</button>
+                    </p>
+                    }
+                    <p>
+                    <button type="button" onclick="window.location.href='@Url.Action("Index", "Home")'" class="btn btn-secondary">Ukloni filter</button>
+                    </p>
+                </div>
+
+        </div>
+    </section>
+    <hr />
+
+    <div>
+        <script>
+            function pokreni() {
+                var x = document.getElementById("kategorija").value;
+                document.getElementById("ispis").innerHTML = x + ":";
+            }
+        </script>
+        @if (string.IsNullOrEmpty(Request.QueryString["Naziv"]))
+        {
+            foreach (var item in Model)
+            {
+                <div style="border:solid 1px gray; border-radius:10px; display:inline-flex; flex-direction:column; min-width:300px; max-width:500px; min-height:100px">
+                    <ol>
+                        <ui><b>Naziv:</b>@Html.DisplayFor(modelItem => item.Naziv)</ui>
+                        <br />
+                        <ui><b>Proizvođač:</b>@Html.DisplayFor(modelItem => item.Proizvodac)</ui>
+                        <br />
+                        <ui><b>Cijena:</b>@Html.DisplayFor(modelItem => item.Cijena)</ui>
+                    </ol>
+                    @Html.ActionLink("Dodaj u košaricu", "Details", "Proizvods", new { id = item.idProizvod }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Detalji", "Details", "Proizvods", new { id = item.idProizvod }, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        }
+        else
+        {
+            var kategorija = (string)Request.QueryString["Naziv"].ToLower().Trim();
+            var filteredItems = Model.Where(p => p.Naziv.ToLower().Contains(kategorija));
+            if (filteredItems.Any())
+            {
+                foreach (var item in filteredItems)
+                {
+                    <div style="border:solid 1px gray; border-radius:10px; display:inline-flex; flex-direction:column; min-width:300px; max-width:500px; min-height:100px">
+                        <ol>
+                            <li><b>Naziv:</b>@Html.DisplayFor(modelItem => item.Naziv)</li>
+                            <br />
+                            <li><b>Proizvođač:</b>@Html.DisplayFor(modelItem => item.Proizvodac)</li>
+                            <br />
+                            <li><b>Cijena:</b>@Html.DisplayFor(modelItem => item.Cijena)</li>
+                        </ol>
+                        @Html.ActionLink("Dodaj u košaricu", "Details", "Proizvods", new { id = item.idProizvod }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Detalji", "Details", "Proizvods", new { id = item.idProizvod }, new { @class = "btn btn-secondary" })
+                    </div>
+                }
+            }
+            else
+            {
+                <h6>Nema rezultata za pretragu: @kategorija</h6>
+            }
+
+        }
+
+
+    </div>
+
+</main>

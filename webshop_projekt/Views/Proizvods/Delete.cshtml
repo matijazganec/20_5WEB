@@ -1,0 +1,62 @@
+﻿@model webshop_projekt.Models.Proizvod
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>este li sigurni da želite obrisati ovaj proizvod?</h3>
+<div>
+    <h4>Proizvod</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cijena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cijena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proizvodac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proizvodac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategorija)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

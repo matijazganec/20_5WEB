@@ -1,0 +1,26 @@
+﻿@model webshop_projekt.Models.Proizvodac
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Proizvodac</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProizvodacName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProizvodacName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.idProizvodac }, new { @class = "btn btn-secondary" }) |
+    @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
+</p>

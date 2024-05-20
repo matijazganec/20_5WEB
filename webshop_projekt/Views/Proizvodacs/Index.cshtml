@@ -1,0 +1,33 @@
+﻿@model IEnumerable<webshop_projekt.Models.Proizvodac>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Popis proizvodaca</h2>
+
+<p>
+    @Html.ActionLink("Dodaj novi proizvod", "Create", null, new { @class = "btn btn-secondary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProizvodacName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProizvodacName)
+        </td>
+        <td>
+            @Html.ActionLink("Uredi", "Edit", new { id = item.idProizvodac }, new { @class = "btn btn-secondary" }) |
+            @Html.ActionLink("Detalji", "Details", new { id = item.idProizvodac }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Izbrisi", "Delete", new { id = item.idProizvodac }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

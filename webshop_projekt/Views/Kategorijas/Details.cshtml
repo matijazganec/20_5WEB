@@ -1,0 +1,26 @@
+﻿@model webshop_projekt.Models.Kategorija
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Kategorije</h2>
+
+<div>
+    <h4>Kategorija</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KategorijaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategorijaName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.KategorijaId }, new { @class = "btn btn-secondary" }) |
+    @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
+</p>

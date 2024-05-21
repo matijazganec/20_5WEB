@@ -31,7 +31,7 @@
             @Html.DisplayFor(modelItem => item.Kolicina)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cijena)
+            @Html.DisplayFor(modelItem => item.Cijena)€
         </td>
 
         <td>
@@ -39,16 +39,21 @@
         </td>
     </tr>
 }
-@{decimal ukupno = 0;}
+@{decimal ukupno = 0.00m;}
 @foreach(var item in Model) {ukupno += item.Cijena * item.Kolicina;}
     <tr>
         <td>Ukupno:</td>
         <td></td>
-        <td>@ukupno</td>
+        <td>@ukupno€</td>
     </tr>
 </table>
-<p>
-    <a href="@Url.Action("IspisRacuna", "KosaricaItems", new {Naziv = ViewBag.Naziv, Kolicina = ViewBag.Kolicina, Cijena = ViewBag.Cijena})" class="btn btn-outline-primary">
+<div style="display:flex; flex-flow:row">
+    <a href="@Url.Action("IspisRacuna", "KosaricaItems", new {Naziv = ViewBag.Naziv, Kolicina = ViewBag.Kolicina, Cijena = ViewBag.Cijena})" class="btn btn-primary">
         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Preuzmi racun
     </a>
-</p>
+</div>
+<div style="display:flex; flex-flow:row">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Natrag na kupnju
+    </a>
+</div>

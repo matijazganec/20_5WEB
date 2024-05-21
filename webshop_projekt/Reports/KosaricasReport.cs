@@ -30,17 +30,17 @@ namespace webshop_projekt.Reports
 
         public void ListaKosarica(List<KosaricaItem> kosaricas)
         {
-            BaseFont bfontZaglavlje = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, false);
+            BaseFont bfontZaglavlje = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
             BaseFont bfontText = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, BaseFont.EMBEDDED);
             BaseFont bfontPodnozje = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1250, false);
 
             Font fontZaglavlje = new Font(bfontZaglavlje, 12, Font.NORMAL, BaseColor.DARK_GRAY);
             Font fontZaglavljeBold = new Font(bfontZaglavlje, 12, Font.BOLD, BaseColor.DARK_GRAY);
-            Font fontNaslov = new Font(bfontText, 14, Font.BOLDITALIC, BaseColor.DARK_GRAY);
+            Font fontNaslov = new Font(bfontText, 14, Font.BOLD, BaseColor.DARK_GRAY);
             Font fontTablicaZaglavlje = new Font(bfontText, 10, Font.BOLD, BaseColor.WHITE);
             Font fontText = new Font(bfontText, 10, Font.NORMAL, BaseColor.BLACK);
 
-            BaseColor tPozadinaZaglavlje = new BaseColor(11, 65, 121);
+            BaseColor tPozadinaZaglavlje = new BaseColor(121, 65, 11);
             BaseColor tPozadinaSadrzaj = new BaseColor(255,255,255);
 
             using(MemoryStream mstream = new MemoryStream())
@@ -59,12 +59,13 @@ namespace webshop_projekt.Reports
                     Paragraph info = new Paragraph();
                     info.Alignment = Element.ALIGN_RIGHT;
                     info.SetLeading(0, 1.2f);
-                    info.Add(new Chunk("Paup Web Shop \n", fontZaglavljeBold));
-                    info.Add(new Chunk("matija.zganec@mev.hr"));
+                    info.Add(new Chunk("PAUP Web Shop \n", fontZaglavljeBold));
+                    info.Add(new Chunk("matija.zganec@mev.hr", fontZaglavlje));
 
                     PdfPCell cInfo = new PdfPCell();
                     cInfo.AddElement(info);
                     cInfo.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    cInfo.VerticalAlignment = Element.ALIGN_TOP;
                     cInfo.Border = Rectangle.NO_BORDER;
                     tZaglavlje.AddCell(cInfo);
 
@@ -78,7 +79,7 @@ namespace webshop_projekt.Reports
 
                     PdfPTable t = new PdfPTable(4);
                     t.WidthPercentage = 100;
-                    t.SetWidths(new float[] { 2,1,1,1});
+                    t.SetWidths(new float[] { 1,1,1,1});
 
                     t.AddCell(GenerirajCeliju("Red. br.", fontTablicaZaglavlje, tPozadinaZaglavlje, true));
                     t.AddCell(GenerirajCeliju("Naziv proizvoda", fontTablicaZaglavlje, tPozadinaZaglavlje, true));
@@ -91,9 +92,10 @@ namespace webshop_projekt.Reports
                         t.AddCell(GenerirajCeliju(i.ToString()+".", fontText, tPozadinaSadrzaj, true));
                         t.AddCell(GenerirajCeliju(k.Naziv, fontText, tPozadinaSadrzaj, true));
                         t.AddCell(GenerirajCeliju(k.Kolicina.ToString(), fontText, tPozadinaSadrzaj, true));
-                        t.AddCell(GenerirajCeliju(k.Cijena.ToString(), fontText, tPozadinaSadrzaj, true));
+                        t.AddCell(GenerirajCeliju(k.Cijena.ToString() + ".00€", fontText, tPozadinaSadrzaj, true));
+                        i++;
                     }
-                    decimal ukupno = 0;
+                    decimal ukupno = 0.00m;
                     foreach(KosaricaItem k in kosaricas)
                     {
                         ukupno += k.Cijena;
@@ -101,7 +103,7 @@ namespace webshop_projekt.Reports
                     t.AddCell(GenerirajCeliju("", fontText, tPozadinaSadrzaj, true));
                     t.AddCell(GenerirajCeliju("", fontText, tPozadinaSadrzaj, true));
                     t.AddCell(GenerirajCeliju("Ukupno:", fontText, tPozadinaSadrzaj, true));
-                    t.AddCell(GenerirajCeliju(ukupno.ToString(), fontText, tPozadinaSadrzaj, true));
+                    t.AddCell(GenerirajCeliju(ukupno.ToString() + "€", fontText, tPozadinaSadrzaj, true));
 
                     pdfDokument.Add(t);
 
@@ -135,7 +137,6 @@ namespace webshop_projekt.Reports
                     } 
                 }
             }
-
         }
     }
 }

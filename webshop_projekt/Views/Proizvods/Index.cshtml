@@ -33,6 +33,10 @@
                 @Html.DisplayNameFor(model => model.Proizvodac)
             </th>
 
+            <th>
+                @Html.DisplayNameFor(model => model.Kategorija)
+            </th>
+
             <th></th>
         </tr>
 
@@ -47,6 +51,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Proizvodac)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategorija)
                 </td>
                 <td>
                     @Html.ActionLink("Uredi", "Edit", new { id = item.idProizvod }, new { @class = "btn btn-secondary" }) |

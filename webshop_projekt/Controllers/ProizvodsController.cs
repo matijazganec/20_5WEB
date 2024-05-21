@@ -30,6 +30,7 @@ namespace webshop_projekt.Controllers
         // GET: Proizvods/Details/5
         [OverrideAuthorization]
         [Authorize]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,7 +67,8 @@ namespace webshop_projekt.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Kategorije = kategorija.Kategorijas.ToList();
+            ViewBag.Proizvodaci = proizvodac.Proizvodacs.ToList();
             return View(proizvod);
         }
 

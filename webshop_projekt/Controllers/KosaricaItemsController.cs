@@ -139,6 +139,36 @@ namespace webshop_projekt.Controllers
 
             return File(kosaricasReport.Podaci, System.Net.Mime.MediaTypeNames.Application.Pdf, "RacunKosarica.pdf");
         }
+
+        [AllowAnonymous]
+        public ActionResult ObrisiKosaricu(int? id)
+        {
+            var lista = db.KosaricaItems.ToList();
+            foreach(var nekaj in lista) {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                KosaricaItem kosaricaItem = db.KosaricaItems.FirstOrDefault(x => x.Id == id);
+
+                if (kosaricaItem == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (Request.HttpMethod == "POST")
+                {
+                    db.KosaricaItems.Remove(kosaricaItem);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                
+            }
+
+            return View("Index");
+        }
     }
 }
 

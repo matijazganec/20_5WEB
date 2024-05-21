@@ -1,59 +1,115 @@
 ﻿@model webshop_projekt.Models.Proizvod
+@using webshop_projekt.Misc
 
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Detalji</h2>
+@if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+{
+    <div>
+        <h4>Proizvod</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
 
-<div>
-    <h4>Proizvod</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cijena)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cijena)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cijena)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Proizvodac)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Proizvodac)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Proizvodac)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Proizvodac)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Kategorija)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Kategorija)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Kategorija)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Kategorija)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Opis)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Opis)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Uredi", "Edit", new { id = Model.idProizvod }, new { @class = "btn btn-secondary" }) |
+        @Html.ActionLink("Natrag u skladište", "Index", null, new { @class = "btn btn-secondary" }) |
+        @Html.ActionLink("Natrag na početnu", "Index", "Home", null, new { @class = "btn btn-secondary" })
+    </p>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Uredi", "Edit", new { id = Model.idProizvod }, new { @class = "btn btn-secondary" }) |
-    @Html.ActionLink("Natrag u skladište", "Index", null, new { @class = "btn btn-secondary" }) |
-    @Html.ActionLink("Natrag na početnu", "Index", "Home", null, new { @class = "btn btn-secondary" })
-</p>
+}
+else
+{
+    <div>
+        <h4>Proizvod</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cijena)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Proizvodac)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Proizvodac)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Kategorija)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Kategorija)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Opis)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Opis)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Natrag na početnu", "Index", "Home", null, new { @class = "btn btn-secondary" })
+    </p>
+}

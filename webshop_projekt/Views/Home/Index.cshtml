@@ -47,7 +47,7 @@
                         <br />
                         <ui><b>Cijena:</b>@Html.DisplayFor(modelItem => item.Cijena)</ui>
                     </ol>
-                    @Html.ActionLink("Dodaj u košaricu", "Details", "Proizvods", new { id = item.idProizvod }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Dodaj u košaricu", "DodajUKosaricu", "KosaricaItems", new { id = item.idProizvod }, new { @class = "btn btn-info" })
                     @Html.ActionLink("Detalji", "Details", "Proizvods", new { id = item.idProizvod }, new { @class = "btn btn-secondary" })
                 </div>
             }

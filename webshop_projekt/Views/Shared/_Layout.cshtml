@@ -30,7 +30,7 @@
                     }
                 </ul>
                 <ul class="navbar-nav flex-grow-1" style="justify-content:right">
-                    <!--<li>Html.ActionLink("Košarica", "Index", "Kosaricas", new { area = "" }, new { class = "nav-link" })</li> manki na html.. i class-->
+                    <li>@Html.ActionLink("Košarica", "Index", "KosaricaItems", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                     {
                         <li>@Html.ActionLink(((User as LogiraniKorisnik).PrezimeIme), "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>

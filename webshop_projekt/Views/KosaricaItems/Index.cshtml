@@ -13,47 +13,61 @@
             @Html.DisplayNameFor(model => model.Naziv)
         </th>
         <th>
-             @Html.DisplayNameFor(model => model.Kolicina)
+            @Html.DisplayNameFor(model => model.Kolicina)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Cijena)
         </th>
-        
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Naziv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kolicina)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cijena)€
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kolicina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cijena)€
+            </td>
 
-        <td>
-            @Html.ActionLink("Izbrisi", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
-@{decimal ukupno = 0.00m;}
-@foreach(var item in Model) {ukupno += item.Cijena * item.Kolicina;}
-    <tr>
-        <td>Ukupno:</td>
-        <td></td>
-        <td>@ukupno€</td>
-    </tr>
+            <td>
+                @Html.ActionLink("Izbrisi", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+    @{decimal ukupno = 0.00m;}
+    @foreach (var item in Model) { ukupno += item.Cijena * item.Kolicina; }
+    @if (ukupno == 0)
+    {
+        <tr>
+            <td>Košarica je prazna</td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
+    else{
+        <tr>
+            <td>Ukupno:</td>
+            <td></td>
+            <td>@ukupno€</td>
+        </tr>
+    }
+    
 </table>
 <div style="display:flex; flex-flow:row">
     <a href="@Url.Action("IspisRacuna", "KosaricaItems", new {Naziv = ViewBag.Naziv, Kolicina = ViewBag.Kolicina, Cijena = ViewBag.Cijena})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Preuzmi racun
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Kupi
     </a>
-</div>
-<div style="display:flex; flex-flow:row">
     <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Natrag na kupnju
     </a>
+    <a href="@Url.Action("ObrisiKosaricu", "KosaricaItems")" class="btn btn-danger">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Obriši košaricu
+    </a>
 </div>
+

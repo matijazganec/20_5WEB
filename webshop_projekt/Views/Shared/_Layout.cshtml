@@ -22,10 +22,10 @@
                     @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                     {
                         <li>@Html.ActionLink("Skladište", "Index", "Proizvods", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Proizvodaci", "Index", "Proizvodacs", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Proizvođači", "Index", "Proizvodacs", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Kategorije", "Index", "Kategorijas", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Dodavanje proizvoda", "Create", "Proizvods", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Dodavanje proizvodaca", "Create", "Proizvodacs", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Dodavanje proizvođača", "Create", "Proizvodacs", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Dodavanje kategorija", "Create", "Kategorijas", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                 </ul>

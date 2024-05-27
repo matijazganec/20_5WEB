@@ -44,6 +44,9 @@ namespace webshop_projekt.Controllers
         [AllowAnonymous]
         public ActionResult DodajUKosaricu(int id)
         {
+            /*if (id == null) { 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }*/
 
             Proizvod proizvod = proizvodi.Proizvods.Find(id);
 

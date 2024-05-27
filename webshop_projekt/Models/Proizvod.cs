@@ -22,7 +22,7 @@ namespace webshop_projekt.Models
         [Required(ErrorMessage = "Molimo upisite cijenu proizvoda")]
         [Display(Name = "Cijena proizvoda")]
         [DataType(DataType.Currency)]
-        public float Cijena { get; set; }
+        public decimal Cijena { get; set; }
 
         [Required(ErrorMessage = "Molimo upisite naziv proizvodaca")]
         [Display(Name = "Naziv proizvodaca")]

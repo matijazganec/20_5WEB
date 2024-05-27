@@ -92,7 +92,7 @@ namespace webshop_projekt.Reports
                         t.AddCell(GenerirajCeliju(i.ToString()+".", fontText, tPozadinaSadrzaj, true));
                         t.AddCell(GenerirajCeliju(k.Naziv, fontText, tPozadinaSadrzaj, true));
                         t.AddCell(GenerirajCeliju(k.Kolicina.ToString(), fontText, tPozadinaSadrzaj, true));
-                        t.AddCell(GenerirajCeliju(k.Cijena.ToString() + ".00€", fontText, tPozadinaSadrzaj, true));
+                        t.AddCell(GenerirajCeliju(k.Cijena.ToString() + ",00€", fontText, tPozadinaSadrzaj, true));
                         i++;
                     }
                     decimal ukupno = 0.00m;

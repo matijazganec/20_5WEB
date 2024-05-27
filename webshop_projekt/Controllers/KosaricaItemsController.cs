@@ -7,16 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using webshop_projekt.Data;
+using webshop_projekt.Misc;
 using webshop_projekt.Models;
 using webshop_projekt.Reports;
 
 namespace webshop_projekt.Controllers
 {
+    [Authorize(Roles = OvlastiKorisnik.Administrator)]
     public class KosaricaItemsController : Controller
     {
         KosaricaDbContext db = new KosaricaDbContext();
         ProizvodDbContext proizvodi = new ProizvodDbContext();
 
+        [AllowAnonymous]
         // GET: KosaricaItems
         public ActionResult Index()
         {
@@ -38,12 +41,12 @@ namespace webshop_projekt.Controllers
             return View(kosaricaItem);
         }
 
+        [AllowAnonymous]
         public ActionResult DodajUKosaricu(int id)
         {
-            if (id == null)
-            {
+            /*if (id == null) { 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            }*/
 
             Proizvod proizvod = proizvodi.Proizvods.Find(id);
 
@@ -82,6 +85,7 @@ namespace webshop_projekt.Controllers
             return View(kosaricaItem);
         }
 
+        [AllowAnonymous]
         // GET: KosaricaItems/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -97,6 +101,7 @@ namespace webshop_projekt.Controllers
             return View(kosaricaItem);
         }
 
+        [AllowAnonymous]
         // POST: KosaricaItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -141,34 +146,20 @@ namespace webshop_projekt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ObrisiKosaricu(int? id)
+        public ActionResult ObrisiKosaricu()
         {
-            var lista = db.KosaricaItems.ToList();
-            foreach(var nekaj in lista) {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
+            var listaKosarica = db.KosaricaItems.ToList();
 
-                KosaricaItem kosaricaItem = db.KosaricaItems.FirstOrDefault(x => x.Id == id);
-
-                if (kosaricaItem == null)
-                {
-                    return HttpNotFound();
-                }
-
-                if (Request.HttpMethod == "POST")
-                {
-                    db.KosaricaItems.Remove(kosaricaItem);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-
-                
+            foreach (var kosaricaItem in listaKosarica)
+            {
+                db.KosaricaItems.Remove(kosaricaItem);
             }
 
-            return View("Index");
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
+
     }
 }
 

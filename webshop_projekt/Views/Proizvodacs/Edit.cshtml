@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Uredi naziv proizvodaca</h2>
+<h2>Uredi naziv proizvođača</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Proizvodac</h4>
+        <h4>Proizvođač</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.idProizvodac)
@@ -27,7 +27,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                <input type="submit" value="Spremi" class="btn btn-outline-primary" />
             </div>
         </div>
     </div>

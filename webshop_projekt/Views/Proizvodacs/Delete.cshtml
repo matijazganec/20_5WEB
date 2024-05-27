@@ -4,9 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h3>Jeste li sigurni da zelite izbrisati ovog proizvodaca?</h3>
+<h3>Jeste li sigurni da želite obrisati ovog proizvođača?</h3>
 <div>
-    <h4>Proizvodac</h4>
+    <h4>Proizvođač</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -23,7 +23,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <input type="submit" value="Obriši" class="btn btn-danger" /> |
             @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
         </div>
     }
